@@ -54,6 +54,9 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'mailApp' => env('MAIL_USERNAME', 'drthugsteph@gmail.com'),
+    'mailName' => env('MAIL_FROM_NAME', 'ECAM-FRET'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

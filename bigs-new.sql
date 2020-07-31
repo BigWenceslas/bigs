@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mer. 17 juin 2020 à 23:59
+-- Généré le : ven. 31 juil. 2020 à 02:46
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.2
 
@@ -25,16 +25,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Structure de la table `articles_blogs`
 --
 
-CREATE TABLE `categories` (
+CREATE TABLE `articles_blogs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `categorie` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `bloc_services`
+--
+
+CREATE TABLE `bloc_services` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categories_blogs`
+--
+
+CREATE TABLE `categories_blogs` (
   `id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -96,29 +127,64 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (67, 11, 'description', 'text', 'Description', 0, 1, 1, 1, 1, 1, '{}', 3),
 (68, 11, 'categorie_id', 'text', 'Categorie Id', 1, 1, 1, 1, 1, 1, '{}', 4),
 (69, 11, 'tag_belongsto_category_relationship', 'relationship', 'categories', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"categorie_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"articles\",\"pivot\":\"0\",\"taggable\":null}', 5),
-(72, 12, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(73, 12, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
-(74, 12, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
-(76, 12, 'prenom', 'text', 'Prenom', 1, 1, 1, 1, 1, 1, '{}', 5),
-(77, 12, 'nom', 'text', 'Nom', 1, 1, 1, 1, 1, 1, '{}', 6),
-(78, 12, 'role', 'rich_text_box', 'Role', 1, 1, 1, 1, 1, 1, '{}', 7),
-(79, 12, 'parcour_pro', 'rich_text_box', 'Parcour Pro', 0, 1, 1, 1, 1, 1, '{}', 8),
-(80, 12, 'photo', 'image', 'Photo', 0, 1, 0, 1, 1, 1, '{}', 9),
 (81, 13, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
 (82, 13, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
 (83, 13, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
 (84, 13, 'user_id', 'text', 'User Id', 1, 1, 1, 1, 1, 1, '{}', 4),
 (85, 13, 'texte', 'rich_text_box', 'Texte', 0, 1, 1, 1, 1, 1, '{}', 5),
 (86, 13, 'temoignage_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"user_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6),
-(87, 14, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(88, 14, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
-(89, 14, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
-(90, 14, 'nom', 'text', 'Nom', 1, 1, 1, 1, 1, 1, '{}', 4),
-(91, 14, 'description', 'rich_text_box', 'Description', 1, 1, 1, 1, 1, 1, '{}', 5),
-(92, 14, 'logo', 'image', 'Logo', 0, 1, 1, 1, 1, 1, '{}', 6),
-(93, 14, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 7),
-(94, 14, 'categorie_id', 'text', 'Categorie Id', 0, 1, 1, 1, 1, 1, '{}', 8),
-(95, 14, 'service_belongsto_category_relationship', 'relationship', 'categories', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"categorie_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"categories\",\"pivot\":\"0\",\"taggable\":null}', 9);
+(96, 16, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(97, 16, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
+(98, 16, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(99, 16, 'deleted_at', 'timestamp', 'Deleted At', 0, 1, 1, 1, 1, 1, '{}', 4),
+(100, 16, 'title', 'text', 'Title', 1, 1, 1, 1, 1, 1, '{}', 5),
+(101, 16, 'description', 'rich_text_box', 'Description', 0, 1, 1, 1, 1, 1, '{}', 6),
+(102, 16, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 7),
+(103, 17, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(104, 17, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
+(105, 17, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(106, 17, 'titre', 'text', 'Titre', 1, 1, 1, 1, 1, 1, '{}', 4),
+(107, 17, 'description', 'rich_text_box', 'Description', 1, 1, 1, 1, 1, 1, '{}', 5),
+(108, 17, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 6),
+(109, 17, 'categorie', 'text', 'Categorie', 0, 1, 1, 1, 1, 1, '{}', 7),
+(110, 17, 'articles_blog_belongsto_categories_blog_relationship', 'relationship', 'categories_blogs', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\CategoriesBlog\",\"table\":\"categories_blogs\",\"type\":\"belongsTo\",\"column\":\"id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"articles_blogs\",\"pivot\":\"0\",\"taggable\":null}', 8),
+(111, 18, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(112, 18, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
+(113, 18, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(114, 18, 'titre', 'text', 'Titre', 1, 1, 1, 1, 1, 1, '{}', 4),
+(115, 18, 'description', 'markdown_editor', 'Description', 1, 1, 1, 1, 1, 1, '{}', 5),
+(116, 19, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(117, 19, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
+(118, 19, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(119, 19, 'nom', 'text', 'Nom', 1, 1, 1, 1, 1, 1, '{}', 4),
+(120, 19, 'description', 'markdown_editor', 'Description', 1, 1, 1, 1, 1, 1, '{}', 5),
+(121, 19, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 6),
+(122, 19, 'categorie_id', 'text', 'Categorie Id', 0, 1, 1, 1, 1, 1, '{}', 7),
+(123, 19, 'service_belongsto_categories_blog_relationship', 'relationship', 'categories_blogs', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\CategoriesBlog\",\"table\":\"categories_blogs\",\"type\":\"belongsTo\",\"column\":\"id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"articles_blogs\",\"pivot\":\"0\",\"taggable\":\"0\"}', 8),
+(124, 20, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(125, 20, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
+(126, 20, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(127, 20, 'prenom', 'text', 'Prenom', 1, 1, 1, 1, 1, 1, '{}', 4),
+(128, 20, 'nom', 'text', 'Nom', 1, 1, 1, 1, 1, 1, '{}', 5),
+(129, 20, 'role', 'text', 'Role', 1, 1, 1, 1, 1, 1, '{}', 6),
+(130, 20, 'parcour_pro', 'markdown_editor', 'Parcour Pro', 0, 1, 1, 1, 1, 1, '{}', 7),
+(131, 20, 'photo', 'image', 'Photo', 0, 1, 1, 1, 1, 1, '{}', 8),
+(132, 22, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(133, 22, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 2),
+(134, 22, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 3),
+(135, 22, 'titre', 'text', 'Titre', 1, 1, 1, 1, 1, 1, '{}', 4),
+(136, 22, 'description', 'markdown_editor', 'Description', 1, 1, 1, 1, 1, 1, '{}', 5),
+(137, 22, 'prix', 'text', 'Prix', 0, 1, 1, 1, 1, 1, '{}', 6),
+(138, 22, 'devise', 'text', 'Devise', 0, 1, 1, 1, 1, 1, '{}', 7),
+(139, 22, 'periode_paiements', 'text', 'Periode Paiements', 0, 1, 1, 1, 1, 1, '{\"default\":\"Mois\",\"options\":{\"option1\":\"Jour\",\"option2\":\"Mois\",\"option3\":\"Trimestre\",\"option4\":\"Semestre\",\"option5\":\"Annee\"}}', 8),
+(140, 22, 'avantage_1', 'text', 'Avantage 1', 0, 1, 1, 1, 1, 1, '{}', 9),
+(141, 22, 'avantage_2', 'text', 'Avantage 2', 0, 1, 1, 1, 1, 1, '{}', 10),
+(142, 22, 'avantage_3', 'text', 'Avantage 3', 0, 1, 1, 1, 1, 1, '{}', 11),
+(143, 22, 'avantage_4', 'text', 'Avantage 4', 0, 1, 1, 1, 1, 1, '{}', 12),
+(144, 22, 'avantage_5', 'text', 'Avantage 5', 0, 1, 1, 1, 1, 1, '{}', 13),
+(145, 22, 'onconvenient_1', 'text', 'Onconvenient 1', 0, 1, 1, 1, 1, 1, '{}', 14),
+(146, 22, 'onconvenient_2', 'text', 'Onconvenient 2', 0, 1, 1, 1, 1, 1, '{}', 15),
+(147, 22, 'onconvenient_3', 'text', 'Onconvenient 3', 0, 1, 1, 1, 1, 1, '{}', 16);
 
 -- --------------------------------------------------------
 
@@ -154,9 +220,14 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', '', 1, 0, NULL, '2020-06-14 19:05:24', '2020-06-14 19:05:24'),
 (10, 'categories', 'categories', 'Category', 'Categories', 'voyager-categories', 'App\\Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-06-15 21:39:10', '2020-06-15 21:39:10'),
 (11, 'tags', 'tags', 'Tag', 'Tags', 'voyager-tag', 'App\\Tag', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":\"title\",\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-06-15 21:41:55', '2020-06-15 21:41:55'),
-(12, 'equipes', 'equipes', 'Equipe', 'Equipes', 'voyager-people', 'App\\Equipe', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2020-06-17 18:34:17', '2020-06-17 18:48:30'),
 (13, 'temoignages', 'temoignages', 'Temoignage', 'Temoignages', 'voyager-bubble', 'App\\Temoignage', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2020-06-17 19:25:59', '2020-06-17 19:28:53'),
-(14, 'services', 'services', 'Service', 'Services', NULL, 'App\\Service', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-06-17 19:36:31', '2020-06-17 19:36:31');
+(16, 'categories_blogs', 'categories-blogs', 'Categories Blog', 'Categories Blogs', 'voyager-categories', 'App\\CategoriesBlog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2020-07-30 21:54:48', '2020-07-30 21:55:27'),
+(17, 'articles_blogs', 'articles-blogs', 'Articles Blog', 'Articles Blogs', 'voyager-documentation', 'App\\ArticlesBlog', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-07-30 21:57:47', '2020-07-30 21:57:47'),
+(18, 'bloc_services', 'bloc-services', 'Bloc Service', 'Bloc Services', 'voyager-browser', 'App\\BlocService', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-07-30 22:06:40', '2020-07-30 22:06:40'),
+(19, 'services', 'services', 'Service', 'Services', 'voyager-list', 'App\\Service', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2020-07-30 22:10:30', '2020-07-30 22:14:11'),
+(20, 'equipes', 'equipes', 'Equipe', 'Equipes', 'voyager-people', 'App\\Equipe', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-07-30 22:16:35', '2020-07-30 22:16:35'),
+(21, 'page_accueil', 'page-accueil', 'Page Accueil', 'Page Accueils', 'voyager-home', 'App\\PageAccueil', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-07-30 22:20:17', '2020-07-30 22:20:17'),
+(22, 'pricings', 'pricings', 'Pricing', 'Pricings', 'voyager-buy', 'App\\Pricing', NULL, NULL, NULL, 1, 0, '{\"order_column\":\"id\",\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null}', '2020-07-30 22:43:20', '2020-07-30 22:43:20');
 
 -- --------------------------------------------------------
 
@@ -246,20 +317,27 @@ CREATE TABLE `menu_items` (
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Dashboard', '', '_self', 'voyager-boat', NULL, NULL, 1, '2020-06-14 19:05:25', '2020-06-14 19:05:25', 'voyager.dashboard', NULL),
 (2, 1, 'Media', '', '_self', 'voyager-images', NULL, 5, 7, '2020-06-14 19:05:25', '2020-06-15 21:56:51', 'voyager.media.index', NULL),
-(3, 1, 'Users', '', '_self', 'voyager-person', NULL, NULL, 8, '2020-06-14 19:05:25', '2020-06-15 21:55:16', 'voyager.users.index', NULL),
-(4, 1, 'Roles', '', '_self', 'voyager-lock', NULL, NULL, 9, '2020-06-14 19:05:26', '2020-06-15 21:55:16', 'voyager.roles.index', NULL),
-(5, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 10, '2020-06-14 19:05:26', '2020-06-15 21:56:51', NULL, NULL),
+(3, 1, 'Users', '', '_self', 'voyager-person', NULL, 24, 1, '2020-06-14 19:05:25', '2020-07-30 21:52:04', 'voyager.users.index', NULL),
+(4, 1, 'Roles', '', '_self', 'voyager-lock', NULL, 24, 2, '2020-06-14 19:05:26', '2020-07-30 21:52:06', 'voyager.roles.index', NULL),
+(5, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 6, '2020-06-14 19:05:26', '2020-07-30 22:45:00', NULL, NULL),
 (6, 1, 'Menu Builder', '', '_self', 'voyager-list', NULL, 5, 1, '2020-06-14 19:05:26', '2020-06-15 21:52:49', 'voyager.menus.index', NULL),
 (7, 1, 'Database', '', '_self', 'voyager-data', NULL, 5, 2, '2020-06-14 19:05:26', '2020-06-15 21:52:49', 'voyager.database.index', NULL),
 (8, 1, 'Compass', '', '_self', 'voyager-compass', NULL, 5, 3, '2020-06-14 19:05:26', '2020-06-15 21:52:49', 'voyager.compass.index', NULL),
 (9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2020-06-14 19:05:26', '2020-06-15 21:52:49', 'voyager.bread.index', NULL),
 (10, 1, 'Settings', '', '_self', 'voyager-settings', NULL, 5, 6, '2020-06-14 19:05:26', '2020-06-15 21:56:37', 'voyager.settings.index', NULL),
 (11, 1, 'Hooks', '', '_self', 'voyager-hook', NULL, 5, 5, '2020-06-14 19:05:32', '2020-06-15 21:52:49', 'voyager.hooks', NULL),
-(18, 1, 'Categories', '', '_self', 'voyager-categories', NULL, NULL, 2, '2020-06-15 21:39:10', '2020-06-15 21:52:59', 'voyager.categories.index', NULL),
-(19, 1, 'Tags', '', '_self', 'voyager-tag', NULL, NULL, 3, '2020-06-15 21:41:55', '2020-06-15 21:53:08', 'voyager.tags.index', NULL),
-(20, 1, 'Equipes', '', '_self', 'voyager-people', NULL, NULL, 11, '2020-06-17 18:34:17', '2020-06-17 18:34:17', 'voyager.equipes.index', NULL),
-(21, 1, 'Temoignages', '', '_self', 'voyager-bubble', '#000000', NULL, 12, '2020-06-17 19:25:59', '2020-06-17 19:28:08', 'voyager.temoignages.index', 'null'),
-(22, 1, 'Services', '', '_self', 'voyager-folder', '#000000', NULL, 13, '2020-06-17 19:36:32', '2020-06-17 19:56:23', 'voyager.services.index', 'null');
+(18, 1, 'Categories', '', '_self', 'voyager-categories', NULL, 23, 2, '2020-06-15 21:39:10', '2020-07-30 22:20:30', 'voyager.categories.index', NULL),
+(21, 1, 'Temoignages', '', '_self', 'voyager-bubble', '#000000', 23, 3, '2020-06-17 19:25:59', '2020-07-30 22:20:30', 'voyager.temoignages.index', 'null'),
+(23, 1, 'Gestion des Contenus', '', '_self', 'voyager-browser', '#000000', NULL, 2, '2020-07-30 21:50:17', '2020-07-30 21:51:20', NULL, ''),
+(24, 1, 'Gestion des Utilisateurs', '', '_self', 'voyager-people', '#000000', NULL, 5, '2020-07-30 21:51:51', '2020-07-30 22:45:00', NULL, ''),
+(25, 1, 'Categories Blogs', '', '_self', NULL, NULL, 27, 1, '2020-07-30 21:54:48', '2020-07-30 21:59:47', 'voyager.categories-blogs.index', NULL),
+(26, 1, 'Articles Blogs', '', '_self', 'voyager-documentation', NULL, 27, 2, '2020-07-30 21:57:47', '2020-07-30 21:59:52', 'voyager.articles-blogs.index', NULL),
+(27, 1, 'Blog', '', '_self', 'voyager-logbook', '#000000', NULL, 4, '2020-07-30 21:59:30', '2020-07-30 22:45:00', NULL, ''),
+(28, 1, 'Bloc Services', '', '_self', 'voyager-browser', NULL, 23, 4, '2020-07-30 22:06:41', '2020-07-30 22:20:30', 'voyager.bloc-services.index', NULL),
+(29, 1, 'Services', '', '_self', 'voyager-list', '#000000', 23, 5, '2020-07-30 22:10:30', '2020-07-30 22:20:30', 'voyager.services.index', 'null'),
+(30, 1, 'Equipes', '', '_self', 'voyager-people', NULL, 23, 6, '2020-07-30 22:16:35', '2020-07-30 22:20:30', 'voyager.equipes.index', NULL),
+(31, 1, 'Page Accueils', '', '_self', 'voyager-home', NULL, 23, 1, '2020-07-30 22:20:17', '2020-07-30 22:20:30', 'voyager.page-accueil.index', NULL),
+(32, 1, 'Pricings', '', '_self', 'voyager-buy', NULL, NULL, 3, '2020-07-30 22:43:20', '2020-07-30 22:45:00', 'voyager.pricings.index', NULL);
 
 -- --------------------------------------------------------
 
@@ -300,6 +378,23 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2018_03_14_000000_add_details_to_data_types_table', 1),
 (21, '2018_03_16_000000_make_settings_value_nullable', 1),
 (22, '2019_08_19_000000_create_failed_jobs_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `page_accueil`
+--
+
+CREATE TABLE `page_accueil` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `titre_site` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facebook` int(11) DEFAULT NULL,
+  `linked` int(11) DEFAULT NULL,
+  `twitter` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -356,21 +451,46 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (64, 'edit_tags', 'tags', '2020-06-15 21:41:55', '2020-06-15 21:41:55'),
 (65, 'add_tags', 'tags', '2020-06-15 21:41:55', '2020-06-15 21:41:55'),
 (66, 'delete_tags', 'tags', '2020-06-15 21:41:55', '2020-06-15 21:41:55'),
-(67, 'browse_equipes', 'equipes', '2020-06-17 18:34:17', '2020-06-17 18:34:17'),
-(68, 'read_equipes', 'equipes', '2020-06-17 18:34:17', '2020-06-17 18:34:17'),
-(69, 'edit_equipes', 'equipes', '2020-06-17 18:34:17', '2020-06-17 18:34:17'),
-(70, 'add_equipes', 'equipes', '2020-06-17 18:34:17', '2020-06-17 18:34:17'),
-(71, 'delete_equipes', 'equipes', '2020-06-17 18:34:17', '2020-06-17 18:34:17'),
 (72, 'browse_temoignages', 'temoignages', '2020-06-17 19:25:59', '2020-06-17 19:25:59'),
 (73, 'read_temoignages', 'temoignages', '2020-06-17 19:25:59', '2020-06-17 19:25:59'),
 (74, 'edit_temoignages', 'temoignages', '2020-06-17 19:25:59', '2020-06-17 19:25:59'),
 (75, 'add_temoignages', 'temoignages', '2020-06-17 19:25:59', '2020-06-17 19:25:59'),
 (76, 'delete_temoignages', 'temoignages', '2020-06-17 19:25:59', '2020-06-17 19:25:59'),
-(77, 'browse_services', 'services', '2020-06-17 19:36:32', '2020-06-17 19:36:32'),
-(78, 'read_services', 'services', '2020-06-17 19:36:32', '2020-06-17 19:36:32'),
-(79, 'edit_services', 'services', '2020-06-17 19:36:32', '2020-06-17 19:36:32'),
-(80, 'add_services', 'services', '2020-06-17 19:36:32', '2020-06-17 19:36:32'),
-(81, 'delete_services', 'services', '2020-06-17 19:36:32', '2020-06-17 19:36:32');
+(82, 'browse_categories_blogs', 'categories_blogs', '2020-07-30 21:54:48', '2020-07-30 21:54:48'),
+(83, 'read_categories_blogs', 'categories_blogs', '2020-07-30 21:54:48', '2020-07-30 21:54:48'),
+(84, 'edit_categories_blogs', 'categories_blogs', '2020-07-30 21:54:48', '2020-07-30 21:54:48'),
+(85, 'add_categories_blogs', 'categories_blogs', '2020-07-30 21:54:48', '2020-07-30 21:54:48'),
+(86, 'delete_categories_blogs', 'categories_blogs', '2020-07-30 21:54:48', '2020-07-30 21:54:48'),
+(87, 'browse_articles_blogs', 'articles_blogs', '2020-07-30 21:57:47', '2020-07-30 21:57:47'),
+(88, 'read_articles_blogs', 'articles_blogs', '2020-07-30 21:57:47', '2020-07-30 21:57:47'),
+(89, 'edit_articles_blogs', 'articles_blogs', '2020-07-30 21:57:47', '2020-07-30 21:57:47'),
+(90, 'add_articles_blogs', 'articles_blogs', '2020-07-30 21:57:47', '2020-07-30 21:57:47'),
+(91, 'delete_articles_blogs', 'articles_blogs', '2020-07-30 21:57:47', '2020-07-30 21:57:47'),
+(92, 'browse_bloc_services', 'bloc_services', '2020-07-30 22:06:40', '2020-07-30 22:06:40'),
+(93, 'read_bloc_services', 'bloc_services', '2020-07-30 22:06:40', '2020-07-30 22:06:40'),
+(94, 'edit_bloc_services', 'bloc_services', '2020-07-30 22:06:40', '2020-07-30 22:06:40'),
+(95, 'add_bloc_services', 'bloc_services', '2020-07-30 22:06:40', '2020-07-30 22:06:40'),
+(96, 'delete_bloc_services', 'bloc_services', '2020-07-30 22:06:40', '2020-07-30 22:06:40'),
+(97, 'browse_services', 'services', '2020-07-30 22:10:30', '2020-07-30 22:10:30'),
+(98, 'read_services', 'services', '2020-07-30 22:10:30', '2020-07-30 22:10:30'),
+(99, 'edit_services', 'services', '2020-07-30 22:10:30', '2020-07-30 22:10:30'),
+(100, 'add_services', 'services', '2020-07-30 22:10:30', '2020-07-30 22:10:30'),
+(101, 'delete_services', 'services', '2020-07-30 22:10:30', '2020-07-30 22:10:30'),
+(102, 'browse_equipes', 'equipes', '2020-07-30 22:16:35', '2020-07-30 22:16:35'),
+(103, 'read_equipes', 'equipes', '2020-07-30 22:16:35', '2020-07-30 22:16:35'),
+(104, 'edit_equipes', 'equipes', '2020-07-30 22:16:35', '2020-07-30 22:16:35'),
+(105, 'add_equipes', 'equipes', '2020-07-30 22:16:35', '2020-07-30 22:16:35'),
+(106, 'delete_equipes', 'equipes', '2020-07-30 22:16:35', '2020-07-30 22:16:35'),
+(107, 'browse_page_accueil', 'page_accueil', '2020-07-30 22:20:17', '2020-07-30 22:20:17'),
+(108, 'read_page_accueil', 'page_accueil', '2020-07-30 22:20:17', '2020-07-30 22:20:17'),
+(109, 'edit_page_accueil', 'page_accueil', '2020-07-30 22:20:17', '2020-07-30 22:20:17'),
+(110, 'add_page_accueil', 'page_accueil', '2020-07-30 22:20:17', '2020-07-30 22:20:17'),
+(111, 'delete_page_accueil', 'page_accueil', '2020-07-30 22:20:17', '2020-07-30 22:20:17'),
+(112, 'browse_pricings', 'pricings', '2020-07-30 22:43:20', '2020-07-30 22:43:20'),
+(113, 'read_pricings', 'pricings', '2020-07-30 22:43:20', '2020-07-30 22:43:20'),
+(114, 'edit_pricings', 'pricings', '2020-07-30 22:43:20', '2020-07-30 22:43:20'),
+(115, 'add_pricings', 'pricings', '2020-07-30 22:43:20', '2020-07-30 22:43:20'),
+(116, 'delete_pricings', 'pricings', '2020-07-30 22:43:20', '2020-07-30 22:43:20');
 
 -- --------------------------------------------------------
 
@@ -424,21 +544,71 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (64, 1),
 (65, 1),
 (66, 1),
-(67, 1),
-(68, 1),
-(69, 1),
-(70, 1),
-(71, 1),
 (72, 1),
 (73, 1),
 (74, 1),
 (75, 1),
 (76, 1),
-(77, 1),
-(78, 1),
-(79, 1),
-(80, 1),
-(81, 1);
+(82, 1),
+(83, 1),
+(84, 1),
+(85, 1),
+(86, 1),
+(87, 1),
+(88, 1),
+(89, 1),
+(90, 1),
+(91, 1),
+(92, 1),
+(93, 1),
+(94, 1),
+(95, 1),
+(96, 1),
+(97, 1),
+(98, 1),
+(99, 1),
+(100, 1),
+(101, 1),
+(102, 1),
+(103, 1),
+(104, 1),
+(105, 1),
+(106, 1),
+(107, 1),
+(108, 1),
+(109, 1),
+(110, 1),
+(111, 1),
+(112, 1),
+(113, 1),
+(114, 1),
+(115, 1),
+(116, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pricings`
+--
+
+CREATE TABLE `pricings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prix` int(11) NOT NULL,
+  `devise` int(11) NOT NULL,
+  `periode_paiements` int(11) NOT NULL,
+  `avantage_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avantage_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avantage_3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avantage_4` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avantage_5` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `inconvenient_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `inconvenient_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `inconvenient_3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -474,7 +644,6 @@ CREATE TABLE `services` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logo` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `categorie_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -483,8 +652,8 @@ CREATE TABLE `services` (
 -- Déchargement des données de la table `services`
 --
 
-INSERT INTO `services` (`id`, `created_at`, `updated_at`, `nom`, `description`, `logo`, `image`, `categorie_id`) VALUES
-(1, '2020-06-17 19:39:02', '2020-06-17 19:39:02', 'sdfsdf', '<p>sdfsdf</p>', 'services/June2020/bRxbacRPYBkSkhdF9UsS.jpg', 'services/June2020/WcSxDS2jZd8OVC7P6sxW.jpg', NULL);
+INSERT INTO `services` (`id`, `created_at`, `updated_at`, `nom`, `description`, `image`, `categorie_id`) VALUES
+(1, '2020-06-17 19:39:02', '2020-06-17 19:39:02', 'sdfsdf', '<p>sdfsdf</p>', 'services/June2020/WcSxDS2jZd8OVC7P6sxW.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -591,7 +760,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`) VALUES
-(1, 1, 'aristide', 'aristide@elitehive.net', 'users/June2020/2JaUZYJ5ub1ZQHjN0xPS.png', NULL, '$2y$10$Gcn.vxvpWmk0ymgpVPWin.k9hlMzxQpRdq7tELE9L/xLdUvwcbxqa', NULL, '{\"locale\":\"en\"}', '2020-06-15 18:14:04', '2020-06-15 21:50:24'),
+(1, 1, 'aristide', 'admin@elitehive.net', 'users/July2020/hP3DTcJrYOPCVYCuNXuF.jpeg', NULL, '$2y$10$sPZdDKnOCUPO1eelH3qO4OJWwK5pJSlGuTeLBbilnRjIAaOYqBvBq', NULL, '{\"locale\":\"en\"}', '2020-06-15 18:14:04', '2020-07-30 21:46:13'),
 (2, 2, 'zibi', 'zibi@elitehive.net', 'users/June2020/D4luDOzKeXgLwYPixHCY.JPG', NULL, '$2y$10$jEWdHazOGvb0nYZKZwMd3OMHs45STOGvywvy.hGHLD0ChbvBhtMse', NULL, '{\"locale\":\"fr\"}', '2020-06-17 19:50:00', '2020-06-17 19:51:10');
 
 -- --------------------------------------------------------
@@ -617,9 +786,21 @@ INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
 --
 
 --
--- Index pour la table `categories`
+-- Index pour la table `articles_blogs`
 --
-ALTER TABLE `categories`
+ALTER TABLE `articles_blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `bloc_services`
+--
+ALTER TABLE `bloc_services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `categories_blogs`
+--
+ALTER TABLE `categories_blogs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -670,6 +851,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `page_accueil`
+--
+ALTER TABLE `page_accueil`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `permissions`
 --
 ALTER TABLE `permissions`
@@ -683,6 +870,12 @@ ALTER TABLE `permission_role`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
   ADD KEY `permission_role_permission_id_index` (`permission_id`),
   ADD KEY `permission_role_role_id_index` (`role_id`);
+
+--
+-- Index pour la table `pricings`
+--
+ALTER TABLE `pricings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `roles`
@@ -744,22 +937,34 @@ ALTER TABLE `user_roles`
 --
 
 --
--- AUTO_INCREMENT pour la table `categories`
+-- AUTO_INCREMENT pour la table `articles_blogs`
 --
-ALTER TABLE `categories`
+ALTER TABLE `articles_blogs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `bloc_services`
+--
+ALTER TABLE `bloc_services`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `categories_blogs`
+--
+ALTER TABLE `categories_blogs`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT pour la table `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `equipes`
@@ -783,7 +988,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT pour la table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -792,10 +997,22 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT pour la table `page_accueil`
+--
+ALTER TABLE `page_accueil`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+
+--
+-- AUTO_INCREMENT pour la table `pricings`
+--
+ALTER TABLE `pricings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
